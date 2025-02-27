@@ -3,6 +3,8 @@ import pandas as pd
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.sql import text
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
@@ -127,6 +129,30 @@ def batch_insert():
         return jsonify({'message': f'{len(rows)} rows successfully inserted into {table_name} table'}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/employees_by_quarter', methods=['GET'])
+def employees_by_quarter():
+    try:
+        file = open('queries/count_quarter.sql')
+        year = '2021'
+        query = file.read().replace("{year}",year)
+        results = db.session.execute(text(query))
+        #print(list(results))
+        return jsonify([row._asdict() for row in results]), 200
+    except SQLAlchemyError as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/employees_hired', methods=['GET'])
+def employees_hired():
+    try:
+        file = open('queries/employees_hired.sql')
+        year = '2021'
+        query = file.read().replace("{year}",year)
+        results = db.session.execute(text(query))
+        #print(list(results))
+        return jsonify([row._asdict() for row in results]), 200
+    except SQLAlchemyError as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
