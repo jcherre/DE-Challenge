@@ -12,6 +12,13 @@ steps:
       - '-c'
       - |
         export PYTHONPATH=$(pwd)
+        export API_TOKEN=${_API_TOKEN}
+        export PROJECT_ID=$PROJECT_ID
+        export REGION=$LOCATION
+        export INSTANCE=${_INSTANCE}
+        export DB_USER=${_DB_USER}
+        export DB_PASS=${_DB_PASS}
+        export DB_NAME=${_DB_NAME}
         pip install -r requirements.txt
         pytest
 
