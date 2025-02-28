@@ -7,7 +7,7 @@ This repo contains my proposed approach for the data engineer challenge. All the
 
 Considering a stack using **Flask** framework for the backend API, **PostgreSQL** as DB with **SQLAlchemy** to handle the transactions, and **pandas** for processing and cleaning, this is the image of the proposed architecture for a cloud implementation:
 
-![Architecture](https://github.com/jcherre/DE-Challenge/tree/main/proposed_architecture.png)
+![Architecture](proposed_architecture.png)
 
 The solution proposes the following services:
 * **Cloud Run** to execute the containerized code for the API in **Google Artifact Registry**
