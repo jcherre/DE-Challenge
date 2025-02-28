@@ -1,5 +1,5 @@
 from os import environ
-import pandas as pd
+import sqlalchemy
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from db import connect_with_connector
@@ -90,6 +90,51 @@ def batch_insert():
     except Exception as e:
         session.rollback()  # Rollback the transaction if there's an error
         print(f'Error occurred: {e}')
+    finally:
+        session.close()  # Ensure the session is closed
+
+@app.route('/employees_by_quarter', endpoint='func3', methods=['GET'])
+@token_required
+def employees_by_quarter():
+    try:
+        #Get engine
+        engine = connect_with_connector(environ)
+        #Get session
+        session = get_session(engine)
+        
+        file = open('cloud/queries/count_quarter.sql')
+        year = '2021'
+        stmt = sqlalchemy.text(file.read().replace("{year}",year))
+
+        result = session.execute(stmt)
+
+        return jsonify({'message': f'Data from employees was loaded succesfully',
+                        'data':[row._asdict() for row in result]}), 200
+    except Exception as e:
+        print(e)
+        return f'Error occurred: {e}', 500
+    finally:
+        session.close()  # Ensure the session is closed
+    
+@app.route('/employees_hired', endpoint='func4', methods=['GET'])
+@token_required
+def employees_hired():
+    try:
+        #Get engine
+        engine = connect_with_connector(environ)
+        #Get session
+        session = get_session(engine)
+        
+        file = open('cloud/queries/employees_hired.sql')
+        year = '2021'
+        stmt = sqlalchemy.text(file.read().replace("{year}",year))
+        
+        result = session.execute(stmt)
+
+        return jsonify({'message': f'Data from employees was loaded succesfully',
+                        'data':[row._asdict() for row in result]}), 200
+    except Exception as e:
+        return f'Error occurred: {e}', 500
     finally:
         session.close()  # Ensure the session is closed
 

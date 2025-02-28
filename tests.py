@@ -70,7 +70,7 @@ for file in files:
         print(f"Failed to upload file. Status code: {response.status_code}")
     print('Response JSON:', response.json())
 """
-
+"""
 url = 'http://127.0.0.1:5000/batch_insert'
 
 json_data = {
@@ -81,6 +81,20 @@ json_data = {
     ]
 }
 response = requests.post(url, json=json_data, headers=headers)
+print('Status Code:', response.status_code)
+#print(response.text)
+print('Response JSON:', response.json())
+"""
+
+url2 = 'http://127.0.0.1:5000/employees_by_quarter'
+url3 = 'http://127.0.0.1:5000/employees_hired'
+
+response = requests.get(url2, headers=headers)
+print('Status Code:', response.status_code)
+#print(response.text)
+print('Response JSON:', response.json())
+
+response = requests.get(url3, headers=headers)
 print('Status Code:', response.status_code)
 #print(response.text)
 print('Response JSON:', response.json())
