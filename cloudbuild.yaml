@@ -19,6 +19,7 @@ steps:
         export DB_USER=${_DB_USER}
         export DB_PASS=${_DB_PASS}
         export DB_NAME=${_DB_NAME}
+        export PUBLIC_IP='YES'
         pip install -r requirements.txt
         pytest
 
