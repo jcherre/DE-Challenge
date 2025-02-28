@@ -1,13 +1,12 @@
 from os import environ
 import sqlalchemy
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from db import connect_with_connector
 from utils import *
 
-load_dotenv('cloud/.env')
+#load_dotenv('cloud/.env')
 app = Flask(__name__)
-
 
 API_TOKEN = environ.get('API_TOKEN')
 
@@ -33,7 +32,7 @@ def upload_csv():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
+        print('session ok')
         if table_name == 'departments':
             table_class = Department
         elif table_name == 'jobs':
@@ -71,7 +70,7 @@ def batch_insert():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
+        print('session ok')
         if table_name == 'departments':
             table_class = Department
         elif table_name == 'jobs':
@@ -101,8 +100,8 @@ def employees_by_quarter():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
-        file = open('cloud/queries/count_quarter.sql')
+        print('session ok')
+        file = open('queries/count_quarter.sql')
         year = '2021'
         stmt = sqlalchemy.text(file.read().replace("{year}",year))
 
@@ -124,8 +123,8 @@ def employees_hired():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
-        file = open('cloud/queries/employees_hired.sql')
+        print('session ok')
+        file = open('queries/employees_hired.sql')
         year = '2021'
         stmt = sqlalchemy.text(file.read().replace("{year}",year))
         
@@ -149,4 +148,4 @@ def health_check():
     return 'API online!', 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=8080)

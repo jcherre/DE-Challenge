@@ -21,7 +21,7 @@ def connect_with_connector(env_connection_sql) -> sqlalchemy.engine.base.Engine:
     DB_PASS = env_connection_sql.get('DB_PASS')
     DB_NAME = env_connection_sql.get('DB_NAME')
 
-    ip_type = IPTypes.PUBLIC
+    ip_type = IPTypes.PRIVATE #IPTypes.PUBLIC
 
     # initialize Cloud SQL Python Connector object
     connector = Connector(refresh_strategy="LAZY")
