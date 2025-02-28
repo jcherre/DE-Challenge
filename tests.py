@@ -4,7 +4,7 @@ import sqlalchemy
 import os
 
 # The URL of the API endpoint
-url = 'http://127.0.0.1:5000/data'
+url = 'http://127.0.0.1:8080/data'
 
 # Your API token
 api_token = 'JMCC99'
@@ -86,8 +86,8 @@ print('Status Code:', response.status_code)
 print('Response JSON:', response.json())
 """
 
-url2 = 'http://127.0.0.1:5000/employees_by_quarter'
-url3 = 'http://127.0.0.1:5000/employees_hired'
+url2 = 'http://127.0.0.1:8080/employees_by_quarter'
+url3 = 'http://127.0.0.1:8080/employees_hired'
 
 response = requests.get(url2, headers=headers)
 print('Status Code:', response.status_code)

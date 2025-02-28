@@ -1,11 +1,27 @@
 steps:
+  # Set up the environment for testing
+  - name: 'gcr.io/cloud-builders/python'
+    id: 'Install Dependencies'
+    args: ['-m', 'pip', 'install', '-r', 'requirements.txt']
+
+  # Run the tests using pytest
+  - name: 'gcr.io/cloud-builders/python'
+    id: 'Run Tests'
+    args: ['-m', 'pytest']
+
+  # Build Docker image if tests pass
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Docker Image'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/flask-api:$SHORT_SHA', '.']
 
+  # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker Image'
     args: ['push', 'gcr.io/$PROJECT_ID/flask-api:$SHORT_SHA']
 
+  # Deploy Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run'
     args:
       - 'gcloud'
       - 'run'

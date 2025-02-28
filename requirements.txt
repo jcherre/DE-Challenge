@@ -6,7 +6,6 @@ gunicorn==23.0.0
 functions-framework==3.8.2
 Werkzeug==2.3.8
 cloudevents==1.11.0
-flask-testing
 pytest
 requests
 pandas
