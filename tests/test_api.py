@@ -1,7 +1,7 @@
 import pytest
 import json
 from os import environ
-from src import create_app
+from app import create_app
 
 API_TOKEN = environ.get('API_TOKEN')
 

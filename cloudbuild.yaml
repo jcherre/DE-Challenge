@@ -6,13 +6,14 @@ steps:
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/flask-api:$SHORT_SHA', '.']
 
   # Install dependencies and run tests
-  - name: 'python:3.10.4'
+  - name: 'python:3.10'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        pip install -r requirements.txt  # Install dependencies
-        pytest  # Run automated tests (ensure pytest is installed in requirements.txt)
+        export PYTHONPATH=$(pwd)
+        pip install -r requirements.txt
+        pytest
 
   # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
