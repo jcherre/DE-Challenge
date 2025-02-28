@@ -1,4 +1,4 @@
-# Globant's Data Engineer CHallenge
+# Globant's Data Engineer Challenge
 ## Introduction
 
 This repo contains my proposed approach for the data engineer challenge. All the info and files from the challenge are inside the docs folder. Other branches were made for proof of concepts and testing, the whole history is being shared for you to see the process of development. There is also a results folder for some output CSV files and captures :thumbsup:
