@@ -32,7 +32,7 @@ def upload_csv():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
+        print('session ok')
         if table_name == 'departments':
             table_class = Department
         elif table_name == 'jobs':
@@ -70,7 +70,7 @@ def batch_insert():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
+        print('session ok')
         if table_name == 'departments':
             table_class = Department
         elif table_name == 'jobs':
@@ -100,8 +100,8 @@ def employees_by_quarter():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
-        file = open('cloud/queries/count_quarter.sql')
+        print('session ok')
+        file = open('queries/count_quarter.sql')
         year = '2021'
         stmt = sqlalchemy.text(file.read().replace("{year}",year))
 
@@ -123,8 +123,8 @@ def employees_hired():
         engine = connect_with_connector(environ)
         #Get session
         session = get_session(engine)
-        
-        file = open('cloud/queries/employees_hired.sql')
+        print('session ok')
+        file = open('queries/employees_hired.sql')
         year = '2021'
         stmt = sqlalchemy.text(file.read().replace("{year}",year))
         
