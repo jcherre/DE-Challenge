@@ -1,13 +1,12 @@
 from os import environ
 import sqlalchemy
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from db import connect_with_connector
 from utils import *
 
-load_dotenv('cloud/.env')
+#load_dotenv('cloud/.env')
 app = Flask(__name__)
-
 
 API_TOKEN = environ.get('API_TOKEN')
 
